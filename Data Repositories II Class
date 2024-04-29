@@ -1,0 +1,11 @@
+### SQL Basics ###
+### Instructor: Dr. Bandeira ###
+
+Select * from Person;
+Select * from Ticket;
+Select Person.Name, Person.ZipCode From Person;
+Select * from Person WHERE ZipCode = 92093;
+Select Person.Name, Person.NumberVehicles From Person WHERE Person.idPerson=1;
+Select * From Person WHERE Person.NumberVehicles>0 AND Person.NumberVehicles<3;
+Select * From Person WHERE Person.NumberVehicles BETWEEN 1 AND 2;
+Select Count(*) From Person WHERE Person.ZipCode=92093;
