@@ -1,0 +1,47 @@
+### SPPS 205 ###
+### Assignment 3: Querying the database ###
+### Instructor: Dr. Nunez Bandeira ###
+
+### Question 1: Names of patients ###
+
+Select * from Patients;
+Select Patients.Name From Patients;
+
+### Queston 2: Prescription 1 Drug ###
+
+Select * from Prescriptions;
+Select * from Drugs;
+Select * from PrescriptionLines;
+
+Select Drugs.Name from Drugs
+Join PrescriptionLines ON PrescriptionLines.Drugs_idDrugs = Drugs.idDrugs
+Join Prescriptions ON Prescriptions.idPrescriptions = PrescriptionLines.Prescriptions_idPrescriptions
+Where idPrescriptions=1;
+
+### Question 3: All drugs to pt ###
+
+Select * from Prescriptions;
+Select * from Drugs;
+Select * from PrescriptionLines;
+Select * from Patients;
+
+Select Drugs.Name From Drugs
+Join PrescriptionLines ON PrescriptionLines.Drugs_idDrugs = Drugs.idDrugs
+Join Prescriptions ON Prescriptions.idPrescriptions = PrescriptionLines.Prescriptions_idPrescriptions
+Join Patients ON Patients.idPatients = Prescriptions.Patients_idPatients
+Where Patients.Name = "Desmond C"
+Group By Drugs.name;
+
+### Question 4: List of pts ever prescribed amoxicillin ###
+
+Select * from Patients;
+Select * from Prescriptions;
+Select * from PrescriptionLines;
+Select * from Drugs;
+
+Select Patients.Name From Patients
+Join Prescriptions ON Prescriptions.Patients_idPatients = Patients_idPatients
+Join PrescriptionLines ON PrescriptionLines.Prescriptions_idPrescriptions = Prescriptions.idPrescriptions
+Join Drugs ON Drugs.idDrugs = PrescriptionLines.Drugs_idDrugs
+Where Drugs.Name = "Amoxicillin"
+Group By Patients.Name;
