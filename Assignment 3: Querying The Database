@@ -45,3 +45,26 @@ Join PrescriptionLines ON PrescriptionLines.Prescriptions_idPrescriptions = Pres
 Join Drugs ON Drugs.idDrugs = PrescriptionLines.Drugs_idDrugs
 Where Drugs.Name = "Amoxicillin"
 Group By Patients.Name;
+
+### Question 5: How many prescriptions does each patient have ###
+
+Select * from Patients;
+Select * from Prescriptions;
+Select * from PrescriptionLines;
+Select * from Drugs;
+
+SELECT Patients.Name, count(Prescriptions.idPrescriptions) From Prescriptions
+JOIN Patients ON Patients.idPatients = Prescriptions.Patients_idPatients
+GROUP BY Patients.Name;
+
+### Question 6: Average Dosages by each doctor for IBU ###
+
+Select * from Prescriptions;
+Select * from PrescriptionLines;
+Select * from Drugs;
+
+Select Prescriptions.Doctor, AVG(PrescriptionLines.idPrescriptionLines) from PrescriptionLines
+Join Prescriptions ON Prescriptions.idPrescriptions = PrescriptionLines.Prescriptions_idPrescriptions
+Join Drugs ON Drugs.idDrugs = PrescriptionLines.Drugs_idDrugs
+Where Drugs.Name = "Ibuprofen"
+group by Prescriptions.Doctor;
