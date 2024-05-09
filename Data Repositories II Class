@@ -1,17 +1,56 @@
-### SQL Basics ###
+### SPPS 205 ###
+### Regional Databases II ###
 ### Instructor: Dr. Bandeira ###
+### dmv Schema ###
 
-Select * from Person;
-Select * from Ticket;
-Select Person.Name, Person.ZipCode From Person;
-Select * from Person WHERE ZipCode = 92093;
-Select Person.Name, Person.NumberVehicles From Person WHERE Person.idPerson=1;
-Select * From Person WHERE Person.NumberVehicles>0 AND Person.NumberVehicles<3;
-Select * From Person WHERE Person.NumberVehicles BETWEEN 1 AND 2;
-Select Count(*) From Person WHERE Person.ZipCode=92093;
-Select Person.ZipCode, Count(*) From Person Group By Person.ZipCode;
+### Helpful Functions Learned ###
+# Now() - Todays Date and Time
+# DATEDDIFF(DATE 1,DATE 2) - NUMBER OF DAYS IN DATE 1 - DATE 2
+# DATE_SUB(DATE, INTERVAL VALUE TYPE), WHERE TYPE CAN BE DAY, WEEK, MONTH, ETC
+# TRUNCATE(NUMBER, DECIMAL PLACES) - HELPFUL CONVERTING DAYS TO WEEKS OR YEARS
 
-### Line Breaks Practice ###
-Select Person.ZipCode, Count(*) From Person 
-Where Person.NumberVehicles>=2
-group by Person.ZipCode;
+### Select Function ###
+Select * From Person; #All Table Attributes
+Select Person.Name, Person.ZipCode From Person; #Only certain columns
+
+### Where Function ###
+Select * From Person Where ZipCode = 92093; #Only certain column values
+Select Person.Name, Person.NumberVehicles From Person Where Person.idPerson=1; #Patient Identifier + desired information
+Select * From Person Where Person.NumberVehicles>0 AND Person.NumberVehicles<3; #Finding ranges 1/2
+Select * From Person Where Person.NumberVehicles Between 1 AND 2; #Finding Ranges 2/2
+Select * From Person Where Person.BirthDate >= '1990-01-10'; #Finding patients birthdate range
+SELECT Name, TRUNCATE(DATEDIFF(NOW(),BirthDate)/365,0) FROM Person; #Current Birthdate
+
+SELECT Person.Name, Person.NumberVehicles FROM Person WHERE Person.Name LIKE "% Doe"; #Finding values with string patterns
+
+### Count and Group By Function ###
+Select Count(*) From Person Where Person.ZipCode=92093; #Count by criteria
+Select Person.Zipcode, Count(*) From Person Group By Person.ZipCode; #Count by critera + identifier
+Select Person.ZipCode, Count(*) From Person WHERE Person.NumberVehicles>=2 Group By Person.ZipCode; #Count by criteria with range
+
+### Join Function ###
+
+Select * From Ticket;
+Select * From Route;
+Select * From PersonalRoute;
+Select * From Person; #Viewing necessary tables
+
+SELECT COUNT(Ticket.IssueDate) FROM Ticket JOIN Person
+ON Ticket.ExtIdPerson=Person.idPerson
+WHERE Person.idPerson=1; #Joining Tables by PT identifier
+
+SELECT Person.Name, COUNT(Ticket.IssueDate) FROM Ticket
+JOIN Person ON Ticket.ExtIdPerson=Person.idPerson
+WHERE Person.Name LIKE '% Doe'
+GROUP BY Person.Name; #Joining tables and similar find
+
+SELECT Person.Name, Route.Street
+FROM Person JOIN PersonalRoute ON PersonalRoute.ExtIdPerson=Person.idPerson
+JOIN Route ON PersonalRoute.ExtIdRoute=Route.idRoute
+WHERE Person.Name LIKE 'John Doe'; #Joining 3 tables
+
+SELECT Person.Name, count(PersonalRoute.Date) From Person
+JOIN PersonalRoute ON PersonalRoute.ExtIdPerson=Person.idPerson
+JOIN Route ON PersonalRoute.ExtIdRoute=Route.idRoute
+WHERE PersonalRoute.Date>=DATE_SUB(NOW(), INTERVAL 7 DAY)
+GROUP BY Person.Name; #Finding each route per person
