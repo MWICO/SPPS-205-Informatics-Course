@@ -39,12 +39,11 @@ Select * from Prescriptions;
 Select * from PrescriptionLines;
 Select * from Drugs;
 
-Select Patients.Name From Patients
-Join Prescriptions ON Prescriptions.Patients_idPatients = Patients_idPatients
-Join PrescriptionLines ON PrescriptionLines.Prescriptions_idPrescriptions = Prescriptions.idPrescriptions
-Join Drugs ON Drugs.idDrugs = PrescriptionLines.Drugs_idDrugs
-Where Drugs.Name = "Amoxicillin"
-Group By Patients.Name;
+Select Patients.Name FROM Patients JOIN Prescriptions on
+Prescriptions.Patients_idPatients=Patients.idPatients JOIN PrescriptionLines on
+PrescriptionLines.Prescriptions_idPrescriptions=Prescriptions.idPrescriptions JOIN Drugs on
+Drugs.idDrugs=PrescriptionLines.Drugs_idDrugs where Drugs.Name= "Amoxicillin"
+Group by Patients.Name;
 
 ### Question 5: How many prescriptions does each patient have ###
 
@@ -63,8 +62,7 @@ Select * from Prescriptions;
 Select * from PrescriptionLines;
 Select * from Drugs;
 
-Select Prescriptions.Doctor, AVG(PrescriptionLines.idPrescriptionLines) from PrescriptionLines
-Join Prescriptions ON Prescriptions.idPrescriptions = PrescriptionLines.Prescriptions_idPrescriptions
-Join Drugs ON Drugs.idDrugs = PrescriptionLines.Drugs_idDrugs
-Where Drugs.Name = "Ibuprofen"
-group by Prescriptions.Doctor;
+Select Prescriptions.Doctor, AVG(PrescriptionLines.Units) From PrescriptionLines Join
+Prescriptions ON Prescriptions.idPrescriptions=PrescriptionLines.Prescriptions_idPrescriptions
+JOIN Drugs ON Drugs.idDrugs=PrescriptionLines.Drugs_idDrugs where Drugs.Name= "Ibuprofen"
+Group by Prescriptions.Doctor;
