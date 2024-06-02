@@ -1,0 +1,85 @@
+# -----------------------------------------------------
+#   SPPS 205 - Assignment 4
+#   Professor: Bandeira
+# -----------------------------------------------------
+
+# Question 1: Age?
+
+birthday_day <- 5
+birthday_month <- 5
+birthday_year <- 1990
+current_day <- 13
+current_month <- 5
+current_year <- 2021
+
+(current_year - birthday_year)*365 # Finding years age * 365 = days
+(current_month - birthday_month)*30 # Finding month of the year *30 = days
+(current_day - birthday_day) # Finding exact days in that month
+
+age <- ((current_year - birthday_year)*365) + ( # Add years + month + day = total age)
+  (current_month - birthday_month)*30) + (
+    (current_day - birthday_day)
+  )
+print(age)
+
+print(paste("I am",age,"days old" ))
+
+
+# Question 2: Smoker vs not smoker
+
+age <- 42
+smoker <- FALSE
+hypertension <- TRUE
+
+if (age < 35 || smoker == FALSE) { # if and else function for conditional & || for "or"
+  print(TRUE)
+} else {  
+  print(FALSE)
+}
+
+# Question 3: Patient Identification ( over 60 and a smoker) + decision
+
+age <- 70
+smoker <- TRUE
+hypertension <- FALSE
+
+if (age>60 & smoker == TRUE) { # if and else function for conditional & for "and"
+  print("Follow up with patient every week")
+} else {
+  print("No follow up necessary")
+}
+  
+# Question 4: Convert celsius to farenheit
+
+degrees <- 28.4
+unit <- "C"
+
+celsius <- (degrees *1.8) + 32 # set data frame
+farenheit <- (degrees - 32)/1.8 # set data frame
+
+if (unit == "C" ) { 
+  print(paste("Converted from", degrees, unit, "to",celsius,"F")) # print paste since "" and df
+} else {
+  print(paste("Converted from",degrees,unit,"to",farenheit,"C"))
+}
+
+# Question 5: Phrase comes up after divisible by 3
+
+end <- 16
+
+for (i in 1:end) { # for = iterations
+  if (i%%3 == 0){ # %% is variable divisible by 
+    print("Fizz")
+  } else print(i)
+}
+
+# Question 6: Phrase comes up after divisible by 3 + Phrase comes up after divisible by 3 & 5
+
+for (i in 1:end) {
+  if (i%%3 == 0) { if (i%%3 == 0 && i%%5 == 0) { #track brackets when using multiple if else
+    print("FizzBuzz")
+  } else print("Fizz")
+    
+  } else print(i)
+  
+}
