@@ -1,0 +1,39 @@
+# --------------------------------------------------------
+#   Introduction to R: Part 2
+#   Professor: Dr. Bandeira
+#   May 31, 2024
+# --------------------------------------------------------
+
+# Indexing Vectors
+
+ages <- c(42,20,35)
+print(ages[1]) # output value for position 1
+print(ages[2:3]) #output values for positions 2 to 3
+print(ages) # print all elements of a vector
+
+#Partitioning a vector: which
+
+print(( which(ages > 30))) # print ages > 30
+over_30 <- ages[which(ages>30)] # df for > 30
+
+# R Practice
+
+birth_years <- c(2002,1991,1980,2004,1986,1955,2002,1995,1974,1990,2000,1990)
+print(( which(birth_years < 1994))) # partition vector >30 years old
+over30 <- birth_years[ which(birth_years < 1994)] # df for > 30
+print(over30)
+
+print( which( birth_years %% 10 <= 4)) # print birth years last decade that end in years 0-4
+first_half <- birth_years[ which(birth_years %% 10 <= 4)]
+print(first_half)
+
+# Vector Operations with For-Loops
+
+INR <- c(2.7, 3.5, 1.2)
+print(length(INR))
+sum_INR <- 0
+for (i in 1:length(INR)) {
+  sum_INR <- sum_INR + INR[i]
+}
+avg_INR <- sum_INR / length(INR)
+print(avg_INR)
