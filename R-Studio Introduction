@@ -37,3 +37,47 @@ for (i in 1:length(INR)) {
 }
 avg_INR <- sum_INR / length(INR)
 print(avg_INR)
+
+# Aggregate Vector Operations
+
+INR <- c(2.7, 3.5, 1.2, 4.0)
+print(sum(INR)/length(INR))
+print(mean(INR))
+print(sd(INR))
+
+# R practice 2
+
+ages <- c(42, 20, 35, 58, 60)
+names <- c("John", "Joana", "Jill", "Ted", "Pat")
+which(ages > 40) # Columns >40
+print(ages[which( ages > 40)]) # show actual age
+mean(ages[which( ages >40)]) # mean of patients over 40
+sd(ages[which( ages >40)]) # sd of patients over 40
+
+ages_mean <- mean(ages[which( ages >40)]) # setting up df
+ages_sd <- sd(ages[which( ages >40)]) #setting up df
+
+which( ages < ages_mean - ages_sd) # which columns
+print(names[which( ages < ages_mean - ages_sd)]) # show actual names
+
+#Iterating through vectors
+
+INR <- c(2.7, 3.5, 1.2)
+tINR <- c(2.5, 2.7, 2.0)
+for (i in  1:length(INR)) {
+  if (INR[i] < tINR[i]){
+    print(paste("Patient", i))
+  }
+  
+}
+
+# R Practice 3
+
+ages <- c(42, 20, 35, 58, 60)
+names <- c("John", "Joana", "Jill", "Ted", "Pat")
+for (pos in  1:length(ages)) {
+  if (ages[pos] >= 40){
+    print(paste(names[pos], "is", ages[pos],"years old"))
+  }
+  
+} 
